@@ -686,11 +686,11 @@ html:not(.js) .feedback-redesign__more {
 }
 .feedback-redesign__pd-embed {
 	width: 100%;
-	min-height: 240px;
+	min-height: 0;
 	border-radius: 16px;
-	overflow: hidden;
-	background: var(--fb-bg);
-	padding: 16px;
+	overflow: visible;
+	background: transparent;
+	padding: 0;
 }
 .feedback-redesign #prodoctorov-reviews #pd_widget_column.pd_widget_column,
 .feedback-redesign #prodoctorov-reviews #pd_widget_column_111898.pd_widget_column,
@@ -1284,7 +1284,7 @@ html:not(.js) .feedback-redesign__more {
 						</div>
 						<div class="feedback-redesign__widget-card" id="pd-panel-orudiynaya" role="tabpanel" aria-labelledby="pd-tab-orudiynaya">
 							<div class="feedback-redesign__pd-embed">
-								<div id="pd_widget_column_111898" class="pd_widget_column pd_full_width" data-lpu="111898">
+								<div id="pd_widget_column_111898" class="pd_widget_column pd_full_width" data-lpu="111898" data-is-initialization="reviews">
 									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
 										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
 									</a>
@@ -1297,7 +1297,7 @@ html:not(.js) .feedback-redesign__more {
 						</div>
 						<div class="feedback-redesign__widget-card" id="pd-panel-letnyaya" role="tabpanel" aria-labelledby="pd-tab-letnyaya" hidden>
 							<div class="feedback-redesign__pd-embed">
-								<div id="pd_widget_column" class="pd_widget_column pd_full_width" data-lpu="111899">
+								<div id="pd_widget_column" class="pd_widget_column pd_full_width" data-lpu="111899" data-is-initialization="reviews">
 									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
 										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
 									</a>
@@ -1536,18 +1536,22 @@ html:not(.js) .feedback-redesign__more {
 				observer.observe(content, { childList: true, subtree: true });
 			});
 
-			var reviewWidgets = document.querySelectorAll('#prodoctorov-reviews .pd_widget_column');
+			var reviewWidgets = document.querySelectorAll('#prodoctorov-reviews .pd_widget_column, #prodoctorov-reviews .pd_widget_reviews');
 			Array.prototype.forEach.call(reviewWidgets, function(el) {
-				el.setAttribute('data-is-initialization', 'true');
+				el.classList.remove('pd_widget_column');
+				el.classList.add('pd_widget_reviews');
+				el.setAttribute('data-is-initialization', 'reviews');
 			});
 
 			var compact = document.createElement('script');
 			compact.src = 'https://prodoctorov.ru/static/js/widget_column.js?v06';
-			function loadLegacyReviews() {
-				if (loadLegacyReviews.started) return;
-				loadLegacyReviews.started = true;
+
+			function startLegacy() {
+				if (startLegacy.done) return;
+				startLegacy.done = true;
 				Array.prototype.forEach.call(reviewWidgets, function(el) {
-					el.removeAttribute('data-is-initialization');
+					el.classList.add('pd_widget_column');
+					el.setAttribute('data-is-initialization', 'reviews');
 				});
 				var css = document.createElement('link');
 				css.rel = 'stylesheet';
@@ -1558,8 +1562,21 @@ html:not(.js) .feedback-redesign__more {
 				legacy.onload = function() { setTimeout(stylePdIframes, 800); };
 				document.body.appendChild(legacy);
 			}
-			compact.onload = loadLegacyReviews;
-			compact.onerror = loadLegacyReviews;
+
+			function waitForBadgesThenLegacy() {
+				var sources = document.querySelectorAll('[data-badges="prodoctorov"] .pd_widget_column');
+				var tries = 0;
+				(function poll() {
+					var ready = sources.length && Array.prototype.every.call(sources, function(el) {
+						return el.getAttribute('data-is-initialization') === 'true';
+					});
+					if (ready || tries++ >= 50) startLegacy();
+					else setTimeout(poll, 120);
+				})();
+			}
+
+			compact.onload = waitForBadgesThenLegacy;
+			compact.onerror = startLegacy;
 			document.body.appendChild(compact);
 		}
 
