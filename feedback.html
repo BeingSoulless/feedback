@@ -292,27 +292,47 @@ html.js .feedback-redesign .reveal.is-visible {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
+	overflow: hidden;
 }
 .feedback-redesign__source-card p {
 	color: var(--fb-muted);
 	font-size: 15px;
 	margin: 0 0 16px;
-	flex: 1;
 }
 .feedback-redesign__badges {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 	margin: 0 0 16px;
-	align-items: center;
+	align-items: flex-start;
+	flex: 1;
 }
-.feedback-redesign__badges iframe {
+.feedback-redesign__badge {
 	width: 150px;
 	height: 50px;
+	overflow: hidden;
+	flex: 0 0 150px;
+	border-radius: 8px;
+	background: var(--fb-bg);
+	line-height: 0;
+}
+.feedback-redesign__badge iframe {
+	width: 150px !important;
+	height: 50px !important;
+	max-width: 150px;
 	border: 0;
 	display: block;
-	background: var(--fb-bg);
-	border-radius: 8px;
+	overflow: hidden;
+	background: transparent;
+}
+.feedback-redesign__badges--pd {
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 12px;
+}
+.feedback-redesign__source-card .pd_widget_column {
+	min-height: 0;
+	max-width: 220px;
 }
 .feedback-redesign__source-link {
 	margin-top: auto;
@@ -557,6 +577,39 @@ html:not(.js) .feedback-redesign__more {
 	outline: 2px solid var(--fb-green-a);
 	outline-offset: 3px;
 }
+.feedback-redesign__platform {
+	width: 100%;
+	max-width: 560px;
+	margin: 0 auto;
+	position: relative;
+}
+.feedback-redesign__platform--pd {
+	max-width: 480px;
+}
+.feedback-redesign__platform .feedback-redesign__tabs {
+	justify-content: center;
+}
+.feedback-redesign__platform .feedback-redesign__widget-card {
+	max-width: none;
+	width: 100%;
+	margin: 0 auto;
+}
+#yandex-reviews .feedback-redesign__title,
+#yandex-reviews .feedback-redesign__lead,
+#prodoctorov-reviews .feedback-redesign__title,
+#prodoctorov-reviews .feedback-redesign__lead,
+#two-gis-reviews .feedback-redesign__title,
+#two-gis-reviews .feedback-redesign__lead {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+#yandex-reviews .feedback-redesign__title.green-line::after,
+#prodoctorov-reviews .feedback-redesign__title.green-line::after,
+#two-gis-reviews .feedback-redesign__title.green-line::after {
+	margin-left: auto;
+	margin-right: auto;
+}
 .feedback-redesign__widget-card {
 	background: var(--fb-white);
 	border: 1px solid var(--fb-border);
@@ -564,11 +617,23 @@ html:not(.js) .feedback-redesign__more {
 	padding: 20px;
 	box-shadow: var(--fb-shadow);
 	max-width: 760px;
+	position: relative;
+}
+.feedback-redesign__widget-card.is-parked {
+	position: absolute !important;
+	left: -9999px !important;
+	top: 0;
+	width: 480px !important;
+	display: block !important;
+	visibility: hidden;
+	pointer-events: none;
+	height: auto !important;
+	overflow: hidden;
 }
 .feedback-redesign__yandex-embed {
 	width: 100%;
-	max-width: 760px;
-	min-height: 540px;
+	height: 800px;
+	min-height: 800px;
 	border-radius: 16px;
 	overflow: hidden;
 	background: var(--fb-bg);
@@ -577,15 +642,17 @@ html:not(.js) .feedback-redesign__more {
 .feedback-redesign__yandex-embed iframe {
 	display: block;
 	width: 100%;
-	height: 540px;
+	height: 800px;
 	min-width: 300px;
-	border: 0;
+	border: 1px solid #e6e6e6;
+	border-radius: 8px;
+	box-sizing: border-box;
 	background: var(--fb-bg);
 	position: relative;
 	z-index: 1;
 }
 .feedback-redesign__stub {
-	min-height: 540px;
+	min-height: 240px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -593,6 +660,9 @@ html:not(.js) .feedback-redesign__more {
 	color: var(--fb-muted);
 	font-size: 15px;
 	background: var(--fb-bg);
+}
+.feedback-redesign__yandex-embed .feedback-redesign__stub {
+	min-height: 800px;
 }
 .feedback-redesign__widget-link {
 	display: inline-flex;
@@ -602,36 +672,78 @@ html:not(.js) .feedback-redesign__more {
 	font-size: 14px;
 	max-width: 100%;
 }
-.feedback-redesign .pd_widget_column {
-	min-height: 280px;
+.feedback-redesign #prodoctorov-reviews #pd_widget_column.pd_widget_column,
+.feedback-redesign #prodoctorov-reviews .pd_widget_column {
+	width: 100% !important;
+	max-width: 480px;
+	margin: 0 auto;
+	min-height: 420px;
 	padding: 8px 0;
+	box-sizing: border-box;
+}
+.feedback-redesign #prodoctorov-reviews .pd_widget_column_content,
+.feedback-redesign #prodoctorov-reviews #pd_rate {
+	width: 100%;
+}
+.feedback-redesign #prodoctorov-reviews .pd_widget_column_content iframe,
+.feedback-redesign #prodoctorov-reviews #pd_rate {
+	width: 100% !important;
+	min-height: 360px;
+	border: 0;
 }
 .feedback-redesign__pd-fallback {
-	margin-top: 8px;
+	margin-top: 16px;
 	font-size: 14px;
+	text-align: center;
 }
-.feedback-redesign__gis-grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 20px;
+.feedback-redesign__gis-embed {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 8px 0 4px;
+	width: 100%;
+}
+.feedback-redesign__gis-map {
+	width: 100%;
+	height: 480px;
+	min-height: 400px;
+	border-radius: 16px;
+	overflow: hidden;
+	background: var(--fb-bg);
+}
+.feedback-redesign__gis-map iframe {
+	width: 100%;
+	height: 480px;
+	min-height: 400px;
+	border: 0;
+	display: block;
+}
+.feedback-redesign__gis-card .feedback-redesign__h3 {
+	text-align: center;
 }
 .feedback-redesign__gis-card address {
 	font-style: normal;
 	color: var(--fb-muted);
 	font-size: 15px;
-	margin: 0 0 16px;
+	margin: 0;
+	text-align: center;
 }
 .feedback-redesign__gis-rating {
-	min-height: 50px;
-	margin-bottom: 16px;
-}
-.feedback-redesign__gis-rating iframe {
 	width: 150px;
 	height: 50px;
+	overflow: hidden;
+	border-radius: 8px;
+	background: var(--fb-bg);
+	line-height: 0;
+}
+.feedback-redesign__gis-rating iframe {
+	width: 150px !important;
+	height: 50px !important;
 	border: 0;
 	display: block;
-	background: var(--fb-bg);
-	border-radius: 8px;
+	overflow: hidden;
+	background: transparent;
 }
 .feedback-redesign__gis-stub {
 	width: 150px;
@@ -646,6 +758,11 @@ html:not(.js) .feedback-redesign__more {
 	justify-content: center;
 	text-align: center;
 	padding: 6px;
+}
+.feedback-redesign__gis-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
 }
 
 /* Leave review */
@@ -753,6 +870,17 @@ html:not(.js) .feedback-redesign__more {
 	.feedback-redesign__sources,
 	.feedback-redesign__leave-grid,
 	.feedback-redesign__gis-grid { grid-template-columns: 1fr; }
+	.feedback-redesign__yandex-embed,
+	.feedback-redesign__yandex-embed iframe,
+	.feedback-redesign__yandex-embed .feedback-redesign__stub {
+		height: 720px;
+		min-height: 720px;
+	}
+	.feedback-redesign__gis-map,
+	.feedback-redesign__gis-map iframe {
+		height: 400px;
+		min-height: 400px;
+	}
 	.feedback-redesign__cta-box { padding: 36px 24px; }
 	.feedback-redesign__hero-actions .feedback-redesign__btn,
 	.feedback-redesign__cta-actions .feedback-redesign__btn { width: 100%; }
@@ -773,6 +901,9 @@ html:not(.js) .feedback-redesign__more {
 		background: transparent;
 		border: 0;
 		box-shadow: none;
+	}
+	.feedback-redesign__platform {
+		max-width: none;
 	}
 	.feedback-redesign__yandex-embed {
 		width: calc(100vw - 16px);
@@ -874,6 +1005,22 @@ html:not(.js) .feedback-redesign__more {
 						<article class="feedback-redesign__card feedback-redesign__source-card reveal" style="transition-delay: 60ms;">
 							<h3 class="feedback-redesign__h3">ПроДокторов</h3>
 							<p>Отзывы о центре и специалистах.</p>
+							<div class="feedback-redesign__badges feedback-redesign__badges--pd" data-badges="prodoctorov">
+								<div id="pd_widget_column_src_111898" class="pd_widget_column" data-lpu="111898">
+									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
+										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
+									</a>
+									<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">«Ребус» на Орудийной</a>
+									<div id="pd_widget_column_content_src_111898" class="pd_widget_column_content"></div>
+								</div>
+								<div id="pd_widget_column_src_111899" class="pd_widget_column" data-lpu="111899">
+									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
+										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
+									</a>
+									<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/">«Ребус» на Летней</a>
+									<div id="pd_widget_column_content_src_111899" class="pd_widget_column_content"></div>
+								</div>
+							</div>
 							<a class="feedback-redesign__link feedback-redesign__source-link" href="#prodoctorov-reviews">Смотреть отзывы</a>
 						</article>
 						<article class="feedback-redesign__card feedback-redesign__source-card reveal" style="transition-delay: 120ms;">
@@ -1049,49 +1196,53 @@ html:not(.js) .feedback-redesign__more {
 				<section class="feedback-redesign__section feedback-redesign__section--green" id="yandex-reviews" aria-labelledby="yandex-reviews-title">
 					<h2 id="yandex-reviews-title" class="feedback-redesign__title green-line reveal">Отзывы на Яндекс Картах</h2>
 					<p class="feedback-redesign__lead reveal">Выберите филиал — Орудийная или Летняя.</p>
-					<div class="feedback-redesign__tabs" role="tablist" aria-label="Филиалы на Яндекс Картах" id="yandex-tablist">
-						<button type="button" class="feedback-redesign__tab" role="tab" id="yandex-tab-orudiynaya" aria-selected="true" aria-controls="yandex-panel-orudiynaya" tabindex="0">Орудийная, 18Д</button>
-						<button type="button" class="feedback-redesign__tab" role="tab" id="yandex-tab-letnyaya" aria-selected="false" aria-controls="yandex-panel-letnyaya" tabindex="-1">Летняя, 70</button>
-					</div>
-					<div class="feedback-redesign__widget-card" id="yandex-panel-orudiynaya" role="tabpanel" aria-labelledby="yandex-tab-orudiynaya">
-						<div class="feedback-redesign__yandex-embed" data-yandex-src="https://yandex.ru/maps-reviews-widget/240724702549?comments" data-yandex-title="Отзывы о центре «Ребус» на Орудийной в Яндекс Картах">
-							<div class="feedback-redesign__stub">Отзывы можно открыть на Яндекс Картах по ссылке ниже.</div>
+					<div class="feedback-redesign__platform">
+						<div class="feedback-redesign__tabs" role="tablist" aria-label="Филиалы на Яндекс Картах" id="yandex-tablist">
+							<button type="button" class="feedback-redesign__tab" role="tab" id="yandex-tab-orudiynaya" aria-selected="true" aria-controls="yandex-panel-orudiynaya" tabindex="0">Орудийная, 18Д</button>
+							<button type="button" class="feedback-redesign__tab" role="tab" id="yandex-tab-letnyaya" aria-selected="false" aria-controls="yandex-panel-letnyaya" tabindex="-1">Летняя, 70</button>
 						</div>
-						<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://yandex.ru/maps/org/rebus/240724702549/reviews/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Орудийной в Яндекс Картах<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
-					</div>
-					<div class="feedback-redesign__widget-card" id="yandex-panel-letnyaya" role="tabpanel" aria-labelledby="yandex-tab-letnyaya" hidden>
-						<div class="feedback-redesign__yandex-embed" data-yandex-src="https://yandex.ru/maps-reviews-widget/235709578910?comments" data-yandex-title="Отзывы о центре «Ребус» на Летней в Яндекс Картах">
-							<div class="feedback-redesign__stub">Отзывы можно открыть на Яндекс Картах по ссылке ниже.</div>
+						<div class="feedback-redesign__widget-card" id="yandex-panel-orudiynaya" role="tabpanel" aria-labelledby="yandex-tab-orudiynaya">
+							<div class="feedback-redesign__yandex-embed" data-yandex-src="https://yandex.ru/maps-reviews-widget/240724702549?comments" data-yandex-title="Отзывы о центре «Ребус» на Орудийной в Яндекс Картах">
+								<div class="feedback-redesign__stub">Официальный виджет Яндекс Карт загрузится после публикации страницы на сайте.</div>
+							</div>
+							<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://yandex.ru/maps/org/rebus/240724702549/reviews/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Орудийной в Яндекс Картах<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
 						</div>
-						<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://yandex.ru/maps/org/rebus/235709578910/reviews/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Летней в Яндекс Картах<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
+						<div class="feedback-redesign__widget-card" id="yandex-panel-letnyaya" role="tabpanel" aria-labelledby="yandex-tab-letnyaya" hidden>
+							<div class="feedback-redesign__yandex-embed" data-yandex-src="https://yandex.ru/maps-reviews-widget/235709578910?comments" data-yandex-title="Отзывы о центре «Ребус» на Летней в Яндекс Картах">
+								<div class="feedback-redesign__stub">Официальный виджет Яндекс Карт загрузится после публикации страницы на сайте.</div>
+							</div>
+							<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://yandex.ru/maps/org/rebus/235709578910/reviews/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Летней в Яндекс Картах<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
+						</div>
 					</div>
 				</section>
 
 				<section class="feedback-redesign__section" id="prodoctorov-reviews" aria-labelledby="prodoctorov-reviews-title">
 					<h2 id="prodoctorov-reviews-title" class="feedback-redesign__title green-line reveal">Отзывы на ПроДокторов</h2>
 					<p class="feedback-redesign__lead reveal">Отзывы о центре и специалистах на ПроДокторов.</p>
-					<div class="feedback-redesign__tabs" role="tablist" aria-label="Филиалы на ПроДокторов" id="pd-tablist">
-						<button type="button" class="feedback-redesign__tab" role="tab" id="pd-tab-orudiynaya" aria-selected="true" aria-controls="pd-panel-orudiynaya" tabindex="0">Орудийная</button>
-						<button type="button" class="feedback-redesign__tab" role="tab" id="pd-tab-letnyaya" aria-selected="false" aria-controls="pd-panel-letnyaya" tabindex="-1">Летняя</button>
-					</div>
-					<div class="feedback-redesign__widget-card" id="pd-panel-orudiynaya" role="tabpanel" aria-labelledby="pd-tab-orudiynaya">
-						<div id="pd_widget_column_111898" class="pd_widget_column" data-lpu="111898">
-							<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
-								<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
-							</a>
-							<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">Психологический центр «Ребус» на Орудийной</a>
-							<div id="pd_widget_column_content_111898" class="pd_widget_column_content"></div>
-							<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">читать отзывы</a>
+					<div class="feedback-redesign__platform feedback-redesign__platform--pd">
+						<div class="feedback-redesign__tabs" role="tablist" aria-label="Филиалы на ПроДокторов" id="pd-tablist">
+							<button type="button" class="feedback-redesign__tab" role="tab" id="pd-tab-orudiynaya" aria-selected="true" aria-controls="pd-panel-orudiynaya" tabindex="0">Орудийная</button>
+							<button type="button" class="feedback-redesign__tab" role="tab" id="pd-tab-letnyaya" aria-selected="false" aria-controls="pd-panel-letnyaya" tabindex="-1">Летняя</button>
 						</div>
-					</div>
-					<div class="feedback-redesign__widget-card" id="pd-panel-letnyaya" role="tabpanel" aria-labelledby="pd-tab-letnyaya" hidden>
-						<div id="pd_widget_column" class="pd_widget_column" data-lpu="111899">
-							<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
-								<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
-							</a>
-							<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/">Психологический центр «Ребус» на Летней</a>
-							<div id="pd_widget_column_content_111899" class="pd_widget_column_content"></div>
-							<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/set/5762-psihologicheskiy-centr-rebus/otzivi/">читать отзывы</a>
+						<div class="feedback-redesign__widget-card" id="pd-panel-orudiynaya" role="tabpanel" aria-labelledby="pd-tab-orudiynaya">
+							<div id="pd_widget_column_111898" class="pd_widget_column pd_full_width" data-lpu="111898">
+								<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
+									<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
+								</a>
+								<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">Психологический центр «Ребус» на Орудийной</a>
+								<div id="pd_widget_column_content_111898" class="pd_widget_column_content"></div>
+								<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">читать отзывы</a>
+							</div>
+						</div>
+						<div class="feedback-redesign__widget-card" id="pd-panel-letnyaya" role="tabpanel" aria-labelledby="pd-tab-letnyaya">
+							<div id="pd_widget_column" class="pd_widget_column pd_full_width" data-lpu="111899">
+								<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
+									<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
+								</a>
+								<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/">Психологический центр «Ребус» на Летней</a>
+								<div id="pd_widget_column_content_111899" class="pd_widget_column_content"></div>
+								<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/set/5762-psihologicheskiy-centr-rebus/otzivi/">читать отзывы</a>
+							</div>
 						</div>
 					</div>
 					<p class="feedback-redesign__pd-fallback">
@@ -1101,20 +1252,35 @@ html:not(.js) .feedback-redesign__more {
 
 				<section class="feedback-redesign__section feedback-redesign__section--soft" id="two-gis-reviews" aria-labelledby="two-gis-reviews-title">
 					<h2 id="two-gis-reviews-title" class="feedback-redesign__title green-line reveal">Отзывы в 2ГИС</h2>
-					<p class="feedback-redesign__lead reveal">Выберите филиал, чтобы посмотреть отзывы в 2ГИС.</p>
-					<div class="feedback-redesign__gis-grid">
-						<article class="feedback-redesign__card feedback-redesign__gis-card reveal">
+					<p class="feedback-redesign__lead reveal">Выберите филиал, чтобы посмотреть карточку в 2ГИС и перейти к отзывам посетителей.</p>
+					<!-- Опционально выше: код выбранного заказчиком агрегатора текстовых отзывов 2ГИС. Официальной текстовой ленты 2ГИС для стороннего сайта нет. Рейтинговые iframe уже заданы в карточках филиалов. -->
+					<div class="feedback-redesign__platform">
+						<div class="feedback-redesign__tabs" role="tablist" aria-label="Филиалы в 2ГИС" id="gis-tablist">
+							<button type="button" class="feedback-redesign__tab" role="tab" id="gis-tab-orudiynaya" aria-selected="true" aria-controls="gis-panel-orudiynaya" tabindex="0">Орудийная, 18Д</button>
+							<button type="button" class="feedback-redesign__tab" role="tab" id="gis-tab-letnyaya" aria-selected="false" aria-controls="gis-panel-letnyaya" tabindex="-1">Летняя, 70</button>
+						</div>
+						<div class="feedback-redesign__widget-card feedback-redesign__gis-card" id="gis-panel-orudiynaya" role="tabpanel" aria-labelledby="gis-tab-orudiynaya">
 							<h3 class="feedback-redesign__h3">Ребус на Орудийной</h3>
 							<address>Орудийная улица, 18Д</address>
-							<div class="feedback-redesign__gis-rating" data-gis-src="https://widget.2gis.ru/api/widget?org_id=70000001017820360&amp;branch_id=70000001063868171&amp;size=medium&amp;theme=light" data-gis-title="Рейтинг центра «Ребус» на Орудийной в 2ГИС"></div>
-							<a class="feedback-redesign__btn feedback-redesign__btn--outline" href="https://2gis.ru/kaliningrad/firm/70000001063868171/tab/reviews" target="_blank" rel="noopener noreferrer">Смотреть отзывы в 2ГИС<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
-						</article>
-						<article class="feedback-redesign__card feedback-redesign__gis-card reveal" style="transition-delay: 60ms;">
+							<div class="feedback-redesign__gis-embed">
+								<div class="feedback-redesign__gis-rating" data-gis-src="https://widget.2gis.ru/api/widget?org_id=70000001017820360&amp;branch_id=70000001063868171&amp;size=medium&amp;theme=light" data-gis-title="Рейтинг центра «Ребус» на Орудийной в 2ГИС"></div>
+								<div class="feedback-redesign__gis-map" data-gis-org="70000001063868171" data-gis-lat="54.7294818" data-gis-lon="20.5572732" data-gis-title="Филиал «Ребус» на Орудийной на карте 2ГИС">
+									<div class="feedback-redesign__stub" style="min-height: 400px;">Официальный виджет 2ГИС загрузится после публикации страницы на сайте.</div>
+								</div>
+								<a class="feedback-redesign__btn feedback-redesign__btn--outline" href="https://2gis.ru/kaliningrad/firm/70000001063868171/tab/reviews" target="_blank" rel="noopener noreferrer">Смотреть отзывы в 2ГИС<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
+							</div>
+						</div>
+						<div class="feedback-redesign__widget-card feedback-redesign__gis-card" id="gis-panel-letnyaya" role="tabpanel" aria-labelledby="gis-tab-letnyaya" hidden>
 							<h3 class="feedback-redesign__h3">Ребус на Летней</h3>
 							<address>Летняя улица, 70</address>
-							<div class="feedback-redesign__gis-rating" data-gis-src="https://widget.2gis.ru/api/widget?org_id=70000001017820360&amp;branch_id=70000001098741656&amp;size=medium&amp;theme=light" data-gis-title="Рейтинг центра «Ребус» на Летней в 2ГИС"></div>
-							<a class="feedback-redesign__btn feedback-redesign__btn--outline" href="https://2gis.ru/kaliningrad/firm/70000001098741656/tab/reviews" target="_blank" rel="noopener noreferrer">Смотреть отзывы в 2ГИС<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
-						</article>
+							<div class="feedback-redesign__gis-embed">
+								<div class="feedback-redesign__gis-rating" data-gis-src="https://widget.2gis.ru/api/widget?org_id=70000001017820360&amp;branch_id=70000001098741656&amp;size=medium&amp;theme=light" data-gis-title="Рейтинг центра «Ребус» на Летней в 2ГИС"></div>
+								<div class="feedback-redesign__gis-map" data-gis-org="70000001098741656" data-gis-lat="54.6690002" data-gis-lon="20.4856540" data-gis-title="Филиал «Ребус» на Летней на карте 2ГИС">
+									<div class="feedback-redesign__stub" style="min-height: 400px;">Официальный виджет 2ГИС загрузится после публикации страницы на сайте.</div>
+								</div>
+								<a class="feedback-redesign__btn feedback-redesign__btn--outline" href="https://2gis.ru/kaliningrad/firm/70000001098741656/tab/reviews" target="_blank" rel="noopener noreferrer">Смотреть отзывы в 2ГИС<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
+							</div>
+						</div>
 					</div>
 				</section>
 
@@ -1179,7 +1345,9 @@ html:not(.js) .feedback-redesign__more {
 			var iframe = document.createElement('iframe');
 			iframe.src = src;
 			iframe.width = '100%';
-			iframe.height = '540';
+			iframe.height = '800';
+			iframe.style.width = '100%';
+			iframe.style.height = '800px';
 			iframe.setAttribute('frameborder', '0');
 			iframe.setAttribute('loading', 'lazy');
 			iframe.setAttribute('title', title);
@@ -1187,8 +1355,34 @@ html:not(.js) .feedback-redesign__more {
 			embed.appendChild(iframe);
 		}
 
-		function initTabs(tablist) {
+		function loadGisMap(embed) {
+			if (!embed || embed.querySelector('iframe')) return;
+			if (isLocal) return;
+			var org = embed.getAttribute('data-gis-org');
+			if (!org) return;
+			var lat = parseFloat(embed.getAttribute('data-gis-lat'), 10);
+			var lon = parseFloat(embed.getAttribute('data-gis-lon'), 10);
+			var options = {
+				pos: (!isNaN(lat) && !isNaN(lon)) ? { lat: lat, lon: lon, zoom: 16 } : {},
+				opt: { city: 'kaliningrad' },
+				org: org
+			};
+			var iframe = document.createElement('iframe');
+			iframe.src = 'https://widgets.2gis.com/widget?type=firmsonmap&options=' + encodeURIComponent(JSON.stringify(options));
+			iframe.width = '100%';
+			iframe.height = '480';
+			iframe.style.width = '100%';
+			iframe.style.height = '480px';
+			iframe.setAttribute('frameborder', '0');
+			iframe.setAttribute('loading', 'lazy');
+			iframe.setAttribute('title', embed.getAttribute('data-gis-title') || 'Филиал на карте 2ГИС');
+			embed.innerHTML = '';
+			embed.appendChild(iframe);
+		}
+
+		function initTabs(tablist, options) {
 			if (!tablist) return;
+			options = options || {};
 			var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
 			function activate(index, fromKeyboard) {
 				tabs.forEach(function(tab, i) {
@@ -1200,10 +1394,20 @@ html:not(.js) .feedback-redesign__more {
 					if (selected) {
 						panel.hidden = false;
 						panel.removeAttribute('hidden');
+						panel.classList.remove('is-parked');
+						panel.removeAttribute('aria-hidden');
 						var embed = panel.querySelector('[data-yandex-src]');
 						if (embed) loadYandexWidget(embed);
+						var gisMap = panel.querySelector('[data-gis-org]');
+						if (gisMap) loadGisMap(gisMap);
+					} else if (options.park) {
+						panel.hidden = false;
+						panel.removeAttribute('hidden');
+						panel.classList.add('is-parked');
+						panel.setAttribute('aria-hidden', 'true');
 					} else {
 						panel.hidden = true;
+						panel.classList.remove('is-parked');
 					}
 				});
 				if (fromKeyboard && tabs[index]) tabs[index].focus();
@@ -1225,32 +1429,83 @@ html:not(.js) .feedback-redesign__more {
 		}
 
 		initTabs(document.getElementById('yandex-tablist'));
-		initTabs(document.getElementById('pd-tablist'));
+		initTabs(document.getElementById('pd-tablist'), { park: true });
+		initTabs(document.getElementById('gis-tablist'));
+
+		function addBadgeIframe(parent, src, title, w, h) {
+			if (!parent) return;
+			var wrap = document.createElement('div');
+			wrap.className = 'feedback-redesign__badge';
+			var iframe = document.createElement('iframe');
+			iframe.src = src;
+			iframe.width = String(w || 150);
+			iframe.height = String(h || 50);
+			iframe.setAttribute('frameborder', '0');
+			iframe.setAttribute('scrolling', 'no');
+			iframe.setAttribute('loading', 'lazy');
+			iframe.setAttribute('title', title);
+			iframe.style.overflow = 'hidden';
+			wrap.appendChild(iframe);
+			parent.appendChild(wrap);
+		}
+
+		function initProdoctorov() {
+			if (!window.pd_insertColumnData) {
+				window.pd_insertColumnData = function(html, id) {
+					var nodes = document.querySelectorAll('#pd_widget_column_content' + (id ? '_' + id : ''));
+					if (!nodes.length) nodes = document.querySelectorAll('#pd_widget_column_content');
+					Array.prototype.forEach.call(nodes, function(node) {
+						node.innerHTML = html;
+					});
+				};
+			}
+
+			var marker = document.createElement('script');
+			marker.type = 'text/plain';
+			marker.src = 'https://prodoctorov.ru/static/js/widget_column.js?v06';
+			document.head.appendChild(marker);
+
+			var css = document.createElement('link');
+			css.rel = 'stylesheet';
+			css.href = 'https://prodoctorov.ru/static/css/widget_column_legacy.css?v06';
+			document.head.appendChild(css);
+
+			Array.prototype.forEach.call(document.querySelectorAll('#prodoctorov-reviews .pd_widget_column'), function(el) {
+				var lpu = el.getAttribute('data-lpu');
+				if (!lpu) return;
+				var script = document.createElement('script');
+				script.src = 'https://prodoctorov.ru/rating/widget/column/' + lpu + '/';
+				el.appendChild(script);
+				el.setAttribute('data-is-initialization', 'true');
+			});
+
+			var pdNew = document.createElement('script');
+			pdNew.src = 'https://prodoctorov.ru/static/js/widget_column.js?v06';
+			pdNew.defer = true;
+			document.body.appendChild(pdNew);
+		}
 
 		if (!isLocal) {
-			var pdScript = document.createElement('script');
-			pdScript.src = 'https://prodoctorov.ru/static/js/widget_column.js?v06';
-			pdScript.defer = true;
-			document.body.appendChild(pdScript);
+			initProdoctorov();
 
-			function addIframe(parent, src, title, w, h) {
-				if (!parent) return;
-				var iframe = document.createElement('iframe');
-				iframe.src = src;
-				iframe.width = String(w || 150);
-				iframe.height = String(h || 50);
-				iframe.setAttribute('frameborder', '0');
-				iframe.setAttribute('loading', 'lazy');
-				iframe.setAttribute('title', title);
-				parent.appendChild(iframe);
-			}
 			document.querySelectorAll('[data-gis-src]').forEach(function(el) {
-				addIframe(el, el.getAttribute('data-gis-src'), el.getAttribute('data-gis-title') || 'Рейтинг в 2ГИС', 150, 50);
+				var iframe = document.createElement('iframe');
+				iframe.src = el.getAttribute('data-gis-src');
+				iframe.width = '150';
+				iframe.height = '50';
+				iframe.setAttribute('frameborder', '0');
+				iframe.setAttribute('scrolling', 'no');
+				iframe.setAttribute('loading', 'lazy');
+				iframe.setAttribute('title', el.getAttribute('data-gis-title') || 'Рейтинг в 2ГИС');
+				iframe.style.overflow = 'hidden';
+				el.appendChild(iframe);
 			});
 			var yandexBadges = document.querySelector('[data-badges="yandex"]');
-			addIframe(yandexBadges, 'https://yandex.ru/sprav/widget/rating-badge/240724702549?type=rating', 'Рейтинг филиала на Орудийной в Яндекс Картах', 150, 50);
-			addIframe(yandexBadges, 'https://yandex.ru/sprav/widget/rating-badge/235709578910?type=rating', 'Рейтинг филиала на Летней в Яндекс Картах', 150, 50);
-			addIframe(document.querySelector('[data-badges="2gis"]'), 'https://widget.2gis.ru/api/widget?org_id=70000001017820360&branch_id=70000001063868171&size=medium&theme=light', 'Рейтинг центра «Ребус» на Орудийной в 2ГИС', 150, 50);
+			addBadgeIframe(yandexBadges, 'https://yandex.ru/sprav/widget/rating-badge/240724702549?type=rating', 'Рейтинг филиала на Орудийной в Яндекс Картах', 150, 50);
+			addBadgeIframe(yandexBadges, 'https://yandex.ru/sprav/widget/rating-badge/235709578910?type=rating', 'Рейтинг филиала на Летней в Яндекс Картах', 150, 50);
+			var gisBadges = document.querySelector('[data-badges="2gis"]');
+			addBadgeIframe(gisBadges, 'https://widget.2gis.ru/api/widget?org_id=70000001017820360&branch_id=70000001063868171&size=medium&theme=light', 'Рейтинг центра «Ребус» на Орудийной в 2ГИС', 150, 50);
+			addBadgeIframe(gisBadges, 'https://widget.2gis.ru/api/widget?org_id=70000001017820360&branch_id=70000001098741656&size=medium&theme=light', 'Рейтинг центра «Ребус» на Летней в 2ГИС', 150, 50);
 		} else {
 			document.querySelectorAll('[data-gis-src]').forEach(function(el) {
 				var stub = document.createElement('div');
