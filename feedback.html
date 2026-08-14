@@ -294,7 +294,8 @@ html.js .feedback-redesign .reveal.is-visible {
 .feedback-redesign__source-card {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
+	text-align: center;
 	min-height: 0;
 	overflow: visible;
 }
@@ -309,7 +310,7 @@ html.js .feedback-redesign .reveal.is-visible {
 	flex-wrap: nowrap;
 	gap: 12px;
 	margin: 0 0 16px;
-	align-items: flex-start;
+	align-items: center;
 	flex: 0 0 auto;
 	width: 100%;
 }
@@ -337,12 +338,12 @@ html.js .feedback-redesign .reveal.is-visible {
 .feedback-redesign__source-card .pd_widget_column {
 	min-height: 0;
 	max-width: 100%;
-	margin: 0;
+	margin: 0 auto;
 }
 .feedback-redesign__source-card .pd_widget_column:not([data-new]) .pd_logo {
 	display: block;
 	max-height: 20px;
-	margin: 0 0 6px;
+	margin: 0 auto 6px;
 }
 .feedback-redesign__source-card .pd_widget_column:not([data-new]) .pd_lpu_name {
 	display: block;
@@ -351,11 +352,13 @@ html.js .feedback-redesign .reveal.is-visible {
 	line-height: 1.4;
 	color: var(--fb-green-a);
 	text-decoration: none;
+	text-align: center;
 }
 .feedback-redesign__source-link {
 	margin-top: auto;
 	padding-top: 8px;
 	align-self: flex-start;
+	text-align: left;
 }
 
 /* Carousel */
@@ -628,7 +631,7 @@ html:not(.js) .feedback-redesign__more {
 	position: absolute !important;
 	left: -9999px !important;
 	top: 0;
-	width: 480px !important;
+	width: 720px !important;
 	display: block !important;
 	visibility: hidden;
 	pointer-events: none;
@@ -680,73 +683,39 @@ html:not(.js) .feedback-redesign__more {
 	font-size: 14px;
 	max-width: 100%;
 }
-.feedback-redesign #prodoctorov-reviews .pd_widget_column,
-.feedback-redesign #prodoctorov-reviews .pd_widget_column * {
-	box-sizing: border-box;
+#prodoctorov-reviews .feedback-redesign__platform {
+	max-width: 800px;
 }
 .feedback-redesign__pd-embed {
 	width: 100%;
+	min-width: 0;
 	min-height: 0;
 	border-radius: 16px;
 	overflow: visible;
 	background: transparent;
 	padding: 0;
 }
-.feedback-redesign #prodoctorov-reviews #pd_widget_column.pd_widget_column,
-.feedback-redesign #prodoctorov-reviews #pd_widget_column_111898.pd_widget_column,
-.feedback-redesign #prodoctorov-reviews .pd_widget_column {
+.feedback-redesign #prodoctorov-reviews .pd_widget_footer {
 	width: 100%;
-	max-width: none;
+	max-width: 100%;
 	margin: 0 auto;
-	min-height: 0;
-	padding: 0;
+}
+.feedback-redesign #prodoctorov-reviews .pd_widget_footer:not([data-new]) {
 	text-align: center;
-	background: transparent;
-	border: 0;
-	font-size: 13px;
-	line-height: 1.45;
 }
-.feedback-redesign #prodoctorov-reviews .pd_widget_column_content {
-	width: 100%;
-	min-height: 0;
-	overflow: visible;
-}
-.feedback-redesign #prodoctorov-reviews .pd_widget_column .pd_logo {
+.feedback-redesign #prodoctorov-reviews .pd_widget_footer:not([data-new]) .pd_logo {
 	display: block;
 	margin: 2px auto 8px;
 	max-height: 20px;
 }
-.feedback-redesign #prodoctorov-reviews .pd_widget_column .pd_lpu_name {
+.feedback-redesign #prodoctorov-reviews .pd_widget_footer:not([data-new]) .pd_lpu_name {
 	display: block;
 	margin: 0 0 10px;
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 1.4;
-	color: #1a5dd0 !important;
-	text-decoration: none !important;
-}
-.feedback-redesign #prodoctorov-reviews .pd_widget_column blockquote,
-.feedback-redesign #prodoctorov-reviews .pd_widget_column q {
-	display: block;
-	text-align: left;
-	margin: 12px 0 0;
-	padding: 12px 14px;
-	font-size: 14px;
-	line-height: 1.55;
-	color: #333;
-	quotes: none;
-	background: #fff;
-	border-radius: 12px;
-}
-.feedback-redesign #prodoctorov-reviews .pd_widget_column_content iframe {
-	display: block;
-	width: 100% !important;
-	min-height: 560px;
-	height: 800px;
-	border: 1px solid #e6e6e6;
-	border-radius: 8px;
-	margin: 12px auto 0;
-	background: #fff;
+	color: #1a5dd0;
+	text-decoration: none;
 }
 .feedback-redesign__pd-fallback {
 	margin-top: 16px;
@@ -1284,12 +1253,11 @@ html:not(.js) .feedback-redesign__more {
 						</div>
 						<div class="feedback-redesign__widget-card" id="pd-panel-orudiynaya" role="tabpanel" aria-labelledby="pd-tab-orudiynaya">
 							<div class="feedback-redesign__pd-embed">
-								<div id="pd_widget_column_111898" class="pd_widget_column pd_full_width" data-lpu="111898" data-is-initialization="reviews">
+								<div id="pd_widget_footer_111898" class="pd_widget_footer" data-lpu="111898">
 									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
 										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
 									</a>
 									<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/">Психологический центр «Ребус» на Орудийной</a>
-									<div id="pd_widget_column_content_111898" class="pd_widget_column_content"></div>
 									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/lpu/111898-psihologicheskiy-centr-rebus/otzivi/">читать отзывы</a>
 								</div>
 							</div>
@@ -1297,16 +1265,15 @@ html:not(.js) .feedback-redesign__more {
 						</div>
 						<div class="feedback-redesign__widget-card" id="pd-panel-letnyaya" role="tabpanel" aria-labelledby="pd-tab-letnyaya" hidden>
 							<div class="feedback-redesign__pd-embed">
-								<div id="pd_widget_column" class="pd_widget_column pd_full_width" data-lpu="111899" data-is-initialization="reviews">
+								<div id="pd_widget_footer_111899" class="pd_widget_footer" data-lpu="111899">
 									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/">
 										<img class="pd_logo" width="132" src="https://prodoctorov.ru/static/_v1/pd/logos/logo-pd-widget.png" alt="ПроДокторов">
 									</a>
 									<a target="_blank" rel="noopener noreferrer" class="pd_lpu_name" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/">Психологический центр «Ребус» на Летней</a>
-									<div id="pd_widget_column_content_111899" class="pd_widget_column_content"></div>
-									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/set/5762-psihologicheskiy-centr-rebus/otzivi/">читать отзывы</a>
+									<a target="_blank" rel="noopener noreferrer" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/otzivi/">читать отзывы</a>
 								</div>
 							</div>
-							<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Летней на ПроДокторов<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
+							<a class="feedback-redesign__link feedback-redesign__widget-link" href="https://prodoctorov.ru/kaliningrad/lpu/111899-psihologicheskiy-centr-rebus-na-letnyay/otzivi/" target="_blank" rel="noopener noreferrer">Открыть все отзывы филиала на Летней на ПроДокторов<svg class="feedback-redesign__ext-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span class="feedback-redesign__vh">Откроется в новой вкладке</span></a>
 						</div>
 					</div>
 					<p class="feedback-redesign__pd-fallback">
@@ -1477,107 +1444,14 @@ html:not(.js) .feedback-redesign__more {
 			parent.appendChild(wrap);
 		}
 
-		function stylePdIframes(root) {
-			var scope = root && root.querySelectorAll ? root : document.getElementById('prodoctorov-reviews');
-			if (!scope) return;
-			Array.prototype.forEach.call(scope.querySelectorAll('.pd_widget_column_content iframe'), function(iframe, i) {
-				if (!iframe.getAttribute('data-fb-pd')) {
-					iframe.setAttribute('data-fb-pd', '1');
-					if (iframe.id === 'pd_rate' && i > 0) {
-						iframe.id = 'pd_rate_' + String(i);
-					}
-				}
-				iframe.setAttribute('scrolling', 'yes');
-				iframe.setAttribute('frameborder', '0');
-				iframe.style.display = 'block';
-				iframe.style.width = '100%';
-				iframe.style.maxWidth = '100%';
-				iframe.style.minHeight = '560px';
-				if (!iframe.style.height) iframe.style.height = '800px';
-				iframe.style.border = '1px solid #e6e6e6';
-				iframe.style.borderRadius = '8px';
-				iframe.style.margin = '12px auto 0';
-				iframe.style.background = '#fff';
-			});
-		}
-
 		function initProdoctorov() {
-			window.addEventListener('message', function(e) {
-				if (typeof e.data !== 'string') return;
-				var origin = e.origin || '';
-				if (origin.indexOf('prodoctorov.ru') === -1) return;
-				var parts = e.data.split('_');
-				if (parts[0] !== 'height' || !parts[1]) return;
-				var height = String(parts[1]);
-				if (height.indexOf('px') === -1) height += 'px';
-				var frames = document.querySelectorAll('#prodoctorov-reviews .pd_widget_column_content iframe');
-				var matched = false;
-				Array.prototype.forEach.call(frames, function(iframe) {
-					if (iframe.contentWindow === e.source) {
-						iframe.style.height = height;
-						iframe.style.minHeight = height;
-						matched = true;
-					}
-				});
-				if (!matched) {
-					var rate = document.getElementById('pd_rate');
-					if (rate) {
-						rate.style.height = height;
-						rate.style.minHeight = height;
-					} else if (frames.length) {
-						frames[0].style.height = height;
-						frames[0].style.minHeight = height;
-					}
-				}
-			});
-
-			Array.prototype.forEach.call(document.querySelectorAll('#prodoctorov-reviews .pd_widget_column_content'), function(content) {
-				var observer = new MutationObserver(function() { stylePdIframes(content); });
-				observer.observe(content, { childList: true, subtree: true });
-			});
-
-			var reviewWidgets = document.querySelectorAll('#prodoctorov-reviews .pd_widget_column, #prodoctorov-reviews .pd_widget_reviews');
-			Array.prototype.forEach.call(reviewWidgets, function(el) {
-				el.classList.remove('pd_widget_column');
-				el.classList.add('pd_widget_reviews');
-				el.setAttribute('data-is-initialization', 'reviews');
-			});
-
 			var compact = document.createElement('script');
 			compact.src = 'https://prodoctorov.ru/static/js/widget_column.js?v06';
-
-			function startLegacy() {
-				if (startLegacy.done) return;
-				startLegacy.done = true;
-				Array.prototype.forEach.call(reviewWidgets, function(el) {
-					el.classList.add('pd_widget_column');
-					el.setAttribute('data-is-initialization', 'reviews');
-				});
-				var css = document.createElement('link');
-				css.rel = 'stylesheet';
-				css.href = 'https://prodoctorov.ru/static/css/widget_column_legacy.css?v06';
-				document.head.appendChild(css);
-				var legacy = document.createElement('script');
-				legacy.src = 'https://prodoctorov.ru/static/js/widget_column_legacy.js?v06';
-				legacy.onload = function() { setTimeout(stylePdIframes, 800); };
-				document.body.appendChild(legacy);
-			}
-
-			function waitForBadgesThenLegacy() {
-				var sources = document.querySelectorAll('[data-badges="prodoctorov"] .pd_widget_column');
-				var tries = 0;
-				(function poll() {
-					var ready = sources.length && Array.prototype.every.call(sources, function(el) {
-						return el.getAttribute('data-is-initialization') === 'true';
-					});
-					if (ready || tries++ >= 50) startLegacy();
-					else setTimeout(poll, 120);
-				})();
-			}
-
-			compact.onload = waitForBadgesThenLegacy;
-			compact.onerror = startLegacy;
 			document.body.appendChild(compact);
+
+			var footer = document.createElement('script');
+			footer.src = 'https://prodoctorov.ru/static/js/widget_footer.js?v06';
+			document.body.appendChild(footer);
 		}
 
 		if (!isLocal) {
